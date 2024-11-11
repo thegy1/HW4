@@ -4,7 +4,7 @@
 # HW 04
 # Lab Section: 12
 # Sources, people worked with, help given to: Luis Molina
-# Comments: Helped me understand the indexing to use in the if statement 
+# Comments: Helped me understand the indexing to used for value variable 
 
 from pathlib import Path
 
@@ -14,12 +14,20 @@ lines = contents.splitlines()
 
 output = Path('out.txt')
 image = ""
+
 for line in lines:
     image+="\n"
     new_line = line.split('\t')
-    for i in range(len(new_line)-1):
+
+    upper = len(new_line[0:-1])
+    for i in range(0,upper):
+        value = int(new_line[i].split(':')[1])
         if 'w' in new_line[i]:
-            image+=' '*int(new_line[i].split(':')[1])
+            image+=' '*value
+        elif '*' in new_line[i]:
+            image += '*'*value
         else:
-            image += '*'*int(new_line[i].split(':')[1])
+            continue
+
 output.write_text(image)
+    
